@@ -1,0 +1,76 @@
+create database intA;
+use intA;
+
+-- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+CREATE TABLE user (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(60) NOT NULL,
+  `surname` VARCHAR(60) NOT NULL,
+  `curp` VARCHAR(45) NOT NULL,
+  `phone` VARCHAR(20) NOT NULL,
+  `address` VARCHAR(200) NOT NULL,
+  `email` VARCHAR(80) NOT NULL,
+  `password` VARCHAR(25) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb3;
+
+DROP TABLE user;
+
+
+-- -----------------------------------------------------
+-- Table `book`
+-- -----------------------------------------------------
+CREATE TABLE book (
+  `isbn` BIGINT NOT NULL,
+  `title` VARCHAR(100) NOT NULL,
+  `author` VARCHAR(45) NOT NULL,
+  `editorial` VARCHAR(45) NOT NULL,
+  `category` VARCHAR(45) NOT NULL,
+  `publishAge` INT NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`isbn`),
+  UNIQUE INDEX `isbn_UNIQUE` (`isbn` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `studyroom`
+-- -----------------------------------------------------
+CREATE TABLE studyroom (
+  `id` BIGINT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `capacity` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+DROP TABLE book;
+
+-- -----------------------------------------------------
+-- Table `prestamo`
+-- -----------------------------------------------------
+CREATE TABLE prestamo (
+  `id` BIGINT NOT NULL,
+  `idBook` BIGINT NOT NULL,
+  `idUser` BIGINT NOT NULL,
+  `peticionFecha` DATE NOT NULL,
+  `inicio_p` DATE NULL,
+  `devolucion_p` DATE NULL,
+  `estado_p` VARCHAR(45) NOT NULL,
+  `finalizacion_p` DATE NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `equipment`
+-- -----------------------------------------------------
+CREATE TABLE equipment(
+  `id` BIGINT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
