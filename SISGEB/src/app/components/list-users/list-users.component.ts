@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/users';
 
 @Component({
@@ -6,7 +6,7 @@ import { User } from 'src/app/interfaces/users';
   templateUrl: './list-users.component.html',
   styleUrls: ['./list-users.component.css']
 })
-export class ListUsersComponent {
+export class ListUsersComponent implements OnInit {
 
   listUsers: User[] = [
     // Uso para pruebas, proximamente el arreglo se llenará con datos de la Base de Datos
