@@ -16,15 +16,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of listUsers" class="table-active">
-        <th>{{ item.id }}</th>
-        <td>{{ item.name }}</td>
-        <td>{{ item.surname }}</td>
-        <td>{{ item.phone }}</td>
-        <td>{{ item.address }}</td>
-        <td>{{ item.email }}</td>
+      <tr *ngFor="let usuario of listUsers" class="table-active">
+        <th>{{ usuario.id }}</th>
+        <td>{{ usuario.name }}</td>
+        <td>{{ usuario.surname }}</td>
+        <td>{{ usuario.phone }}</td>
+        <td>{{ usuario.address }}</td>
+        <td>{{ usuario.email }}</td>
         <td>
-          <button type="button" class="btn btn-info btn-sm" routerLink="/editUser/{{ item.id }}">Editar</button>
+          <button type="button" class="btn btn-info btn-sm" routerLink="/editUser/{{ usuario.id }}">Editar</button>
           <button type="button" class="btn btn-danger btn-sm ms-2">Eliminar</button>
         </td>
       </tr>

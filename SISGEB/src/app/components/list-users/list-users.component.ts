@@ -15,8 +15,6 @@ export class ListUsersComponent implements OnInit {
     {id: 3, name: "Andrea", surname: "Estrada", phone: "7778755421", address: "Cuernavaca", email: "20213tn011@utez.edu.mx", password:"mich123"},
     {id: 4, name: "Elena", surname: "Abigail", phone: "7771234857", address: "Cuernavaca", email: "20203tn002@utez.edu.mx", password:"elena123"},
   ]
-
-
   constructor(){ }
 
   ngOnInit(): void {
