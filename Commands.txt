@@ -1,0 +1,5 @@
+Setup Commands
+// En consolas separadas
+tsc --watch
+
+nodemon dist/index.js

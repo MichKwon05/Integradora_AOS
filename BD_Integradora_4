@@ -2,9 +2,9 @@ create database intA;
 use intA;
 
 -- -----------------------------------------------------
--- Table `user`
+-- Table `users`
 -- -----------------------------------------------------
-CREATE TABLE user (
+CREATE TABLE users (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(60) NOT NULL,
   `surname` VARCHAR(60) NOT NULL,
@@ -15,16 +15,11 @@ CREATE TABLE user (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb3;
-
-DROP TABLE user;
-
-
 -- -----------------------------------------------------
 -- Table `book`
 -- -----------------------------------------------------
-CREATE TABLE book (
+CREATE TABLE books (
   `isbn` BIGINT NOT NULL,
   `title` VARCHAR(100) NOT NULL,
   `author` VARCHAR(45) NOT NULL,
@@ -39,20 +34,17 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `studyroom`
 -- -----------------------------------------------------
-CREATE TABLE studyroom (
+CREATE TABLE studyrooms (
   `id` BIGINT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `capacity` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
-
-DROP TABLE book;
-
 -- -----------------------------------------------------
 -- Table `prestamo`
 -- -----------------------------------------------------
-CREATE TABLE prestamo (
+CREATE TABLE prestamos (
   `id` BIGINT NOT NULL,
   `idBook` BIGINT NOT NULL,
   `idUser` BIGINT NOT NULL,
@@ -67,7 +59,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `equipment`
 -- -----------------------------------------------------
-CREATE TABLE equipment(
+CREATE TABLE equipments(
   `id` BIGINT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
