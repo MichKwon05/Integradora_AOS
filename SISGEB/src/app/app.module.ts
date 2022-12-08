@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 // Moduloss
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 // Componentes
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -24,7 +25,8 @@ import { PageNotFoundComponentComponent } from './components/page-not-found-comp
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
