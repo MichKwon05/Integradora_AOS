@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/interfaces/users';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -8,17 +9,27 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./list-users.component.css']
 })
 export class ListUsersComponent implements OnInit {
-
   listUsers: User[] = []
-  constructor(private _userService: UsersService){ }
+  loading: Boolean = false;
+  constructor(private _userService: UsersService, private toastr: ToastrService){ }
 
   ngOnInit(): void {
     this.getListUsers();
   }
 
   getListUsers(){
-    this._userService.getListUsers().subscribe((data) => {
+    this.loading = true;
+    this._userService.getListUsers().subscribe((data: User[]) => {
       this.listUsers = data;
+      this.loading = false;
+    })
+  }
+
+  deleteUser(id: number){
+    this.loading = true;
+    this._userService.deleteUser(id).subscribe(() => {
+      this.getListUsers();
+      this.toastr.warning("Usuario Eliminado con exito", "Usuario Eliminado")
     })
   }
 }
