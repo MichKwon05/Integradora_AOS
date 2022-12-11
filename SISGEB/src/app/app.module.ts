@@ -16,6 +16,9 @@ import { ListUsersComponent } from './components/list-users/list-users.component
 import { AddEditUserComponent } from './components/add-edit-user/add-edit-user.component';
 import { PageNotFoundComponentComponent } from './components/page-not-found-component/page-not-found-component.component';
 import { ProgressBarComponent } from './shared/progress-bar/progress-bar.component';
+import { ProfileUserComponent } from './components/profile-user/profile-user.component';
+import { AddEditBookComponent } from './components/add-edit-book/add-edit-book.component';
+import { ListBooksComponent } from './components/list-books/list-books.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { ProgressBarComponent } from './shared/progress-bar/progress-bar.compone
     ListUsersComponent,
     AddEditUserComponent,
     PageNotFoundComponentComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    ProfileUserComponent,
+    AddEditBookComponent,
+    ListBooksComponent
   ],
   imports: [
     BrowserModule,

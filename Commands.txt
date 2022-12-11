@@ -1,5 +1,10 @@
-Setup Commands
+Setup Server Commands
 // En consolas separadas
+1
 tsc --watch
 
+2
 nodemon dist/index.js
+
+Creación de Componentes
+ng g c [ruta/nombre]

@@ -6,11 +6,11 @@ import { User } from 'src/app/interfaces/users';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
-  selector: 'app-add-edit-user',
-  templateUrl: './add-edit-user.component.html',
-  styleUrls: ['./add-edit-user.component.css']
+  selector: 'app-profile-user',
+  templateUrl: './profile-user.component.html',
+  styleUrls: ['./profile-user.component.css']
 })
-export class AddEditUserComponent implements OnInit {
+export class ProfileUserComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
   id: number;
@@ -43,7 +43,7 @@ export class AddEditUserComponent implements OnInit {
   getUser(id: number){
     this.loading = true;
     this._userService.getUser(id).subscribe((data:User) => {
-      //console.log(data);
+      console.log(data);
       this.loading = false;
       this.form.setValue({
         name: data.name,
@@ -66,22 +66,12 @@ export class AddEditUserComponent implements OnInit {
       password: this.form.value.password
     }
     this.loading = true;
-    
-    if(this.id !== 0){
       // Editar
       user.id = this.id;
       this._userService.updateUser(this.id, user).subscribe(() => {
-        this.toastr.info(`Usuario de ${user.name} ${user.surname} fue actualizado con exito`, 'Usuario Actualizado');
+        this.toastr.info(`Los datos de usuario fuerón actualizados con exito`, 'Usuario Actualizado');
         this.loading = false;
         this.router.navigate(['/getUsers']);
       })
-    }else{
-      // Agregar
-      this._userService.saveUser(user).subscribe(() => {
-        this.toastr.success(`Usuario de ${user.name} ${user.surname} fue registrado con exito`, 'Usuario Registrado');
-        this.loading = false;
-        this.router.navigate(['/getUsers']);
-      })
-    }
   }
 }
