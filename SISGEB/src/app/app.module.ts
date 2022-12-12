@@ -19,6 +19,7 @@ import { ProgressBarComponent } from './shared/progress-bar/progress-bar.compone
 import { ProfileUserComponent } from './components/profile-user/profile-user.component';
 import { AddEditBookComponent } from './components/add-edit-book/add-edit-book.component';
 import { ListBooksComponent } from './components/list-books/list-books.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ListBooksComponent } from './components/list-books/list-books.component
     ProgressBarComponent,
     ProfileUserComponent,
     AddEditBookComponent,
-    ListBooksComponent
+    ListBooksComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

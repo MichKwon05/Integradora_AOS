@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import db from '../db/connection';
+import bcrypt from '../models/user';
 
 const User = db.define('User', {
     // Por cada valor de la tabla (menos id), 
