@@ -1,0 +1,30 @@
+<app-progress-bar  *ngIf="loading == true"></app-progress-bar>
+<div class="container">
+  <div class="title">
+    <h4>Listado de salas</h4>
+    <button type="button" class="btn btn-primary" routerLink="/addStudyroom">Agregar sala</button>
+  </div>
+  <table *ngIf="listStudyrooms.length > 0" class="table table-hover">
+    <thead>
+      <tr class="table-danger">
+        <th scope="col">Id</th>
+        <td scope="col">Nombre</td>
+        <td scope="col">Capacidad</td>
+        <td scope="col"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let studyroom of listStudyrooms" class="table-active">
+        <th>{{studyroom.id}}</th>
+        <td>{{studyroom.name}}</td>
+        <td>{{studyroom.capacity}}</td>
+        <td class="col-2">
+          <button [routerLink]="['/editStudyroom', studyroom.id]" type="button" class="btn btn-info btn-sm" routerLink="">Editar</button>
+          <button (click)="deleteStudyroom(studyroom.id!)" type="button" class="btn btn-danger btn-sm ms-2">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h5  *ngIf="listStudyrooms.length == 0">No hay salas registrados</h5>
+</div>
+

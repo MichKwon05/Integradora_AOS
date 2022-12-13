@@ -19,6 +19,10 @@ import { ProgressBarComponent } from './shared/progress-bar/progress-bar.compone
 import { ProfileUserComponent } from './components/profile-user/profile-user.component';
 import { AddEditBookComponent } from './components/add-edit-book/add-edit-book.component';
 import { ListBooksComponent } from './components/list-books/list-books.component';
+import { ListStudyroomComponent } from './components/list-studyroom/list-studyroom.component';
+import { ListEquipmentComponent } from './components/list-equipment/list-equipment.component';
+import { AddEditEquipmentComponent } from './components/add-edit-equipment/add-edit-equipment.component';
+import { AddEditStudyroomComponent } from './components/add-edit-studyroom/add-edit-studyroom.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { ListBooksComponent } from './components/list-books/list-books.component
     ProgressBarComponent,
     ProfileUserComponent,
     AddEditBookComponent,
-    ListBooksComponent
+    ListBooksComponent,
+    ListStudyroomComponent,
+    ListEquipmentComponent,
+    AddEditEquipmentComponent,
+    AddEditStudyroomComponent
   ],
   imports: [
     BrowserModule,

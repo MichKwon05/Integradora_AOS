@@ -15,9 +15,6 @@ const Book = db.define('Book', {
     },
     publishAge: {
         type: DataTypes.INTEGER
-    },
-    status: {
-        type: DataTypes.STRING
     }
 }, {
     createdAt: false,

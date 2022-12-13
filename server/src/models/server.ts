@@ -2,6 +2,8 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors'
 import routesUser from '../routes/user';
 import routesBook from '../routes/book';
+import routesRoom from '../routes/studyroom';
+import routesEquipment from '../routes/equipment';
 import db from "../db/connection";
 
 class Server {
@@ -30,7 +32,8 @@ class Server {
         })
         this.app.use('/api/users', routesUser);
         this.app.use('/api/books', routesBook);
-        
+        this.app.use('/api/studyrooms', routesRoom);
+        this.app.use('/api/equipments', routesEquipment);
     }
 
     midlewares() {

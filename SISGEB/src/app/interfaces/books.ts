@@ -4,5 +4,4 @@ export interface Book {
     author: string;
     editorial: string;
     publishAge: number;
-    status: string;
 }

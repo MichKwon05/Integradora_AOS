@@ -1,0 +1,37 @@
+<div class="mt-3">
+    <div class="col-lg-6 offset-lg-4">
+      <div class="card text-white bg-info mb-3" style="max-width: 40rem">
+        <div class="card-header text-center"><h3>Agregar sala</h3></div>
+        <div class="card-body">
+          <form [formGroup]="formStudy" class="form-group" (ngSubmit)="addStudy()">
+              <div class="row">
+                  <div class="col-lg-6">
+                      <label for="name" class="col-form-label col-form-label-lg">Nombre</label>
+                      <input formControlName="name" type="text" class="form-control form-control-lg" name="name">
+                      <span *ngIf="formStudy.get('name')?.hasError('required') && formStudy.get('name')?.touched" class="text-sm text-danger">
+                          <strong>Campo Requerido</strong>
+                      </span>
+                  </div>
+                  <div class="col-lg-6">
+                      <label for="capacity" class="col-form-label col-form-label-lg">Capacidad</label>
+                      <input formControlName="capacity" type="text" class="form-control form-control-lg" name="capacity">
+                      <span *ngIf="formStudy.get('capacity')?.hasError('required') && formStudy.get('capacity')?.touched" class="text-sm text-danger">
+                          <strong>Campo Requerido</strong>
+                      </span>
+                  </div>
+              </div>
+              
+              <div class="row mt-4 text-center">
+                  <div class="col-lg-6">
+                      <button routerLink="/getStudyRoom" type="button" class="btn btn-danger btn-lg">Volver</button>
+                  </div>
+                  <div class="col-lg-6">
+                      <button [disabled]="formStudy.invalid" type="submit" class="btn btn-primary btn-lg">Aceptar</button>
+                  </div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

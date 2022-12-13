@@ -1,1 +1,62 @@
-<p>add-edit-book works!</p>
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="mt-3">
+  <div class="col-lg-6 offset-lg-4">
+    <div class="card text-white bg-info mb-3" style="max-width: 40rem">
+      <div class="card-header text-center"><h3>{{ operacion }} Libro</h3></div>
+      <div class="card-body">
+        <form [formGroup]="form" class="form-group" (ngSubmit)="addBook()">
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="id" class="col-form-label col-form-label-lg">ISBN</label>
+                    <input formControlName="id" type="text" class="form-control form-control-lg" name="id">
+                    <span *ngIf="form.get('id')?.hasError('required') && form.get('id')?.touched" class="text-sm text-danger">
+                        <strong>Campo Requerido</strong>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label for="title" class="col-form-label col-form-label-lg">Titulo</label>
+                    <input formControlName="title" type="text" class="form-control form-control-lg" name="title">
+                    <span *ngIf="form.get('title')?.hasError('required') && form.get('title')?.touched" class="text-sm text-danger">
+                        <strong>Campo Requerido</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-lg-6">
+                    <label for="author" class="col-form-label col-form-label-lg">Autor</label>
+                    <input formControlName="author" type="text" class="form-control form-control-lg" name="author">
+                    <span *ngIf="form.get('author')?.hasError('required') && form.get('author')?.touched" class="text-sm text-danger">
+                        <strong>Campo Requerido</strong>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label for="editorial" class="col-form-label col-form-label-lg">Editorial</label>
+                    <input formControlName="editorial" type="text" class="form-control form-control-lg" name="editorial">
+                    <span *ngIf="form.get('editorial')?.hasError('required') && form.get('editorial')?.touched" class="text-sm text-danger">
+                        <strong>Campo Requerido</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-lg-6">
+                    <label for="publishAge" class="col-form-label col-form-label-lg">Año de Publicación</label>
+                    <input formControlName="publishAge" type="email" class="form-control form-control-lg" name="publishAge">
+                    <span *ngIf="form.get('publishAge')?.hasError('required') && form.get('publishAge')?.touched" class="text-sm text-danger">
+                        <strong>Campo Requerido</strong>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="row mt-4 text-center">
+                <div class="col-lg-6">
+                    <button routerLink="/getBooks" type="button" class="btn btn-danger btn-lg">Volver</button>
+                </div>
+                <div class="col-lg-6">
+                    <button [disabled]="form.invalid" type="submit" class="btn btn-primary btn-lg">Aceptar</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

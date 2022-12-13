@@ -1,25 +1,13 @@
 import { DataTypes } from 'sequelize';
 import db from '../db/connection';
 
-const User = db.define('User', {
+const Studyroom = db.define('Studyroom', {
     // Por cada valor de la tabla (menos id), 
     // en DataTypes usar el tipo de dato especificados en mysql
     name: {
         type: DataTypes.STRING
     },
-    surname: {
-        type: DataTypes.STRING
-    },
-    phone: {
-        type: DataTypes.STRING
-    },
-    address: {
-        type: DataTypes.STRING
-    },
-    email: {
-        type: DataTypes.STRING
-    },
-    password: {
+    capacity: {
         type: DataTypes.STRING
     }
 }, {
@@ -27,4 +15,4 @@ const User = db.define('User', {
     updatedAt: false
 })
 
-export default User;
+export default Studyroom; 

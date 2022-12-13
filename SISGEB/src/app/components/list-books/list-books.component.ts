@@ -25,11 +25,11 @@ export class ListBooksComponent implements OnInit{
     })
   }
 
-  deleteUser(id: number){
+  deleteBook(id: number){
     this.loading = true;
     this._bookService.deleteBook(id).subscribe(() => {
       this.getListBooks();
-      this.toastr.warning("Usuario Eliminado con exito", "Usuario Eliminado")
+      this.toastr.warning("Libro Eliminado con exito", "Libro Eliminado")
     })
   }
 }

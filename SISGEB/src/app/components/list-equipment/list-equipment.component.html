@@ -1,0 +1,28 @@
+<app-progress-bar *ngIf="loading == true"></app-progress-bar>
+<div class="container">
+  <div class="title">
+    <h4>Listado de equipo de cómputo</h4>
+    <button type="button" class="btn btn-primary" routerLink="/addEquipment">Agregar equipo de cómputo</button>
+  </div>
+  <table *ngIf="listEquipments.length > 0" class="table table-hover">
+    <thead>
+      <tr class="table-danger">
+        <th scope="col">Id</th>
+        <td scope="col">Nombre</td>
+        <td scope="col"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let equipment of listEquipments" class="table-active">
+        <th>{{equipment.id}}</th>
+        <td>{{equipment.name}}</td>
+        <td class="col-2">
+          <button [routerLink]="['/editEquipment', equipment.id]" type="button" class="btn btn-info btn-sm" routerLink="">Editar</button>
+          <button  type="button" class="btn btn-danger btn-sm ms-2">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 *ngIf="listEquipments.length == 0">No hay libros registrados</h5>
+</div>
+

@@ -12,48 +12,48 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateBook = exports.postBook = exports.deleteBook = exports.getBook = exports.getBooks = void 0;
-const book_1 = __importDefault(require("../models/book"));
-const getBooks = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    const listBooks = yield book_1.default.findAll();
-    response.json(listBooks);
+exports.updateStudyroom = exports.postStudyroom = exports.deleteStudyroom = exports.getStudyroom = exports.getStudyrooms = void 0;
+const studyroom_1 = __importDefault(require("../models/studyroom"));
+const getStudyrooms = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const listRooms = yield studyroom_1.default.findAll();
+    response.json(listRooms);
 });
-exports.getBooks = getBooks;
-const getBook = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getStudyrooms = getStudyrooms;
+const getStudyroom = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = request.params;
-    const book = yield book_1.default.findByPk(id);
-    if (book) {
-        response.json(book);
+    const room = yield studyroom_1.default.findByPk(id);
+    if (room) {
+        response.json(room);
     }
     else {
         response.status(404).json({
-            mensaje: `Libro con isbn ${id} no existe :(`
+            mensaje: `La sala con id [${id}] no existe :(`
         });
     }
 });
-exports.getBook = getBook;
-const deleteBook = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getStudyroom = getStudyroom;
+const deleteStudyroom = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = request.params;
-    const book = yield book_1.default.findByPk(id);
-    if (!book) {
+    const room = yield studyroom_1.default.findByPk(id);
+    if (!room) {
         response.json({
-            mensaje: `Libro con isbn ${id} no existe :(`
+            mensaje: `Sala con id ${id} no existe :(`
         });
     }
     else {
-        yield book.destroy();
+        yield room.destroy();
         response.json({
-            mensaje: `Libro Eliminado con exito`
+            mensaje: `Sala Eliminada con exito`
         });
     }
 });
-exports.deleteBook = deleteBook;
-const postBook = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteStudyroom = deleteStudyroom;
+const postStudyroom = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = request;
     try {
-        yield book_1.default.create(body);
+        yield studyroom_1.default.create(body);
         response.json({
-            mensaje: 'Libro Agregado con exito'
+            mensaje: 'Sala Agregada con exito'
         });
     }
     catch (error) {
@@ -63,21 +63,21 @@ const postBook = (request, response) => __awaiter(void 0, void 0, void 0, functi
         });
     }
 });
-exports.postBook = postBook;
-const updateBook = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+exports.postStudyroom = postStudyroom;
+const updateStudyroom = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = request;
     const { id } = request.params;
     try {
-        const book = yield book_1.default.findByPk(id);
-        if (book) {
-            yield book.update(body);
+        const room = yield studyroom_1.default.findByPk(id);
+        if (room) {
+            yield room.update(body);
             response.json({
-                mensaje: `Libro Actualizado con exito`
+                mensaje: `Sala Actualizada con exito`
             });
         }
         else {
             response.json({
-                mensaje: `Libro con isbn ${id} no existe :(`
+                mensaje: `Sala con id ${id} no existe :(`
             });
         }
     }
@@ -88,4 +88,4 @@ const updateBook = (request, response) => __awaiter(void 0, void 0, void 0, func
         });
     }
 });
-exports.updateBook = updateBook;
+exports.updateStudyroom = updateStudyroom;

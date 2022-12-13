@@ -16,6 +16,8 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const user_1 = __importDefault(require("../routes/user"));
 const book_1 = __importDefault(require("../routes/book"));
+const studyroom_1 = __importDefault(require("../routes/studyroom"));
+const equipment_1 = __importDefault(require("../routes/equipment"));
 const connection_1 = __importDefault(require("../db/connection"));
 class Server {
     constructor() {
@@ -39,6 +41,8 @@ class Server {
         });
         this.app.use('/api/users', user_1.default);
         this.app.use('/api/books', book_1.default);
+        this.app.use('/api/studyrooms', studyroom_1.default);
+        this.app.use('/api/equipments', equipment_1.default);
     }
     midlewares() {
         //Parseamos el body

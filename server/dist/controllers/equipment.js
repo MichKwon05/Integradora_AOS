@@ -12,48 +12,48 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateBook = exports.postBook = exports.deleteBook = exports.getBook = exports.getBooks = void 0;
-const book_1 = __importDefault(require("../models/book"));
-const getBooks = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    const listBooks = yield book_1.default.findAll();
-    response.json(listBooks);
+exports.updateEquipment = exports.postEquipment = exports.deleteEquipment = exports.getEquipment = exports.getEquipments = void 0;
+const equipment_1 = __importDefault(require("../models/equipment"));
+const getEquipments = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const listEquipments = yield equipment_1.default.findAll();
+    response.json(listEquipments);
 });
-exports.getBooks = getBooks;
-const getBook = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getEquipments = getEquipments;
+const getEquipment = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = request.params;
-    const book = yield book_1.default.findByPk(id);
-    if (book) {
-        response.json(book);
+    const equipment = yield equipment_1.default.findByPk(id);
+    if (equipment) {
+        response.json(equipment);
     }
     else {
         response.status(404).json({
-            mensaje: `Libro con isbn ${id} no existe :(`
+            mensaje: `Equipo con id ${id} no existe :(`
         });
     }
 });
-exports.getBook = getBook;
-const deleteBook = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getEquipment = getEquipment;
+const deleteEquipment = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = request.params;
-    const book = yield book_1.default.findByPk(id);
-    if (!book) {
+    const equipment = yield equipment_1.default.findByPk(id);
+    if (!equipment) {
         response.json({
-            mensaje: `Libro con isbn ${id} no existe :(`
+            mensaje: `Equipo con id ${id} no existe :(`
         });
     }
     else {
-        yield book.destroy();
+        yield equipment.destroy();
         response.json({
-            mensaje: `Libro Eliminado con exito`
+            mensaje: `Equipo Eliminado con exito`
         });
     }
 });
-exports.deleteBook = deleteBook;
-const postBook = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteEquipment = deleteEquipment;
+const postEquipment = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = request;
     try {
-        yield book_1.default.create(body);
+        yield equipment_1.default.create(body);
         response.json({
-            mensaje: 'Libro Agregado con exito'
+            mensaje: 'Equipo Agregado con exito'
         });
     }
     catch (error) {
@@ -63,21 +63,21 @@ const postBook = (request, response) => __awaiter(void 0, void 0, void 0, functi
         });
     }
 });
-exports.postBook = postBook;
-const updateBook = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+exports.postEquipment = postEquipment;
+const updateEquipment = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = request;
     const { id } = request.params;
     try {
-        const book = yield book_1.default.findByPk(id);
-        if (book) {
-            yield book.update(body);
+        const equipment = yield equipment_1.default.findByPk(id);
+        if (equipment) {
+            yield equipment.update(body);
             response.json({
-                mensaje: `Libro Actualizado con exito`
+                mensaje: `Equipo Actualizado con exito`
             });
         }
         else {
             response.json({
-                mensaje: `Libro con isbn ${id} no existe :(`
+                mensaje: `Equipo con id ${id} no existe :(`
             });
         }
     }
@@ -88,4 +88,4 @@ const updateBook = (request, response) => __awaiter(void 0, void 0, void 0, func
         });
     }
 });
-exports.updateBook = updateBook;
+exports.updateEquipment = updateEquipment;

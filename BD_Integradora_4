@@ -1,6 +1,8 @@
 create database intA;
 use intA;
 
+INSERT INTO `inta`.`books` (`id`, `title`, `author`, `editorial`, `publishAge`) VALUES ('1672345', 'HTML y CSS', 'James', 'Planeta', '2012');
+
 -- -----------------------------------------------------
 -- Table `users`
 -- -----------------------------------------------------
@@ -20,22 +22,19 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `book`
 -- -----------------------------------------------------
 CREATE TABLE books (
-  `id` BIGINT NOT NULL,
+  `id` BIGINT NOT NULL auto_increment,
   `title` VARCHAR(100) NOT NULL,
   `author` VARCHAR(45) NOT NULL,
   `editorial` VARCHAR(45) NOT NULL,
   `publishAge` INT NOT NULL,
-  `status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
-
-drop table books;
 -- -----------------------------------------------------
 -- Table `studyroom`
 -- -----------------------------------------------------
 CREATE TABLE studyrooms (
-  `id` BIGINT NOT NULL,
+  `id` BIGINT NOT NULL auto_increment,
   `name` VARCHAR(45) NOT NULL,
   `capacity` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -60,7 +59,7 @@ ENGINE = InnoDB;
 -- Table `equipment`
 -- -----------------------------------------------------
 CREATE TABLE equipments(
-  `id` BIGINT NOT NULL,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);

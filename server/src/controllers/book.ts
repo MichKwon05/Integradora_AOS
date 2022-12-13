@@ -9,25 +9,25 @@ export const getBooks = async (request: Request, response: Response) => {
 }
 
 export const getBook = async (request: Request, response: Response) => {
-    const { ibsm } = request.params;
-    const book = await Book.findByPk(ibsm);
+    const { id } = request.params;
+    const book = await Book.findByPk(id);
 
     if (book) {
         response.json(book);
     } else {
         response.status(404).json({
-            mensaje: `Libro con isbn ${ibsm} no existe :(`
+            mensaje: `Libro con isbn ${id} no existe :(`
         })
     }
 }
 
 export const deleteBook = async (request: Request, response: Response) => {
-    const { ibsm } = request.params;
-    const book = await Book.findByPk(ibsm);
+    const { id } = request.params;
+    const book = await Book.findByPk(id);
 
     if (!book) {
         response.json({
-            mensaje: `Libro con isbn ${ibsm} no existe :(`
+            mensaje: `Libro con isbn ${id} no existe :(`
         })
     } else {
         await book.destroy();
@@ -58,10 +58,10 @@ export const postBook = async (request: Request, response: Response) => {
 
 export const updateBook = async (request: Request, response: Response) => {
     const { body } = request;
-    const { ibsm } = request.params;
+    const { id } = request.params;
 
     try {
-        const book = await Book.findByPk(ibsm);
+        const book = await Book.findByPk(id);
 
         if (book) {
             await book.update(body);
@@ -70,7 +70,7 @@ export const updateBook = async (request: Request, response: Response) => {
             })
         } else {
             response.json({
-                mensaje: `Libro con isbn ${ibsm} no existe :(`
+                mensaje: `Libro con isbn ${id} no existe :(`
             })
         }
     } catch (error) {
