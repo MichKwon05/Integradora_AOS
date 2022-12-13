@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateUser = exports.postUser = exports.deleteUser = exports.getUser = exports.getUsers = void 0;
 const user_1 = __importDefault(require("../models/user"));
+//import bcrypt from 'bcrypt';
+//import jwt from 'jsonwebtoken';
 const getUsers = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const listUsers = yield user_1.default.findAll();
     response.json(listUsers);
@@ -32,6 +34,37 @@ const getUser = (request, response) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.getUser = getUser;
+/*
+export const loginUser = async (req: Request, res: Response) =>{
+    const {email , password} = req.body;
+
+    ///validamos si existe
+    const user: any = await User.findOne({ where: {email: email}});
+
+    if (!user) {
+        return res.status(400).json({
+            msg: `No existe el usuario con el correo ${email} en la base de datos`
+        })
+    }
+    console.log('sigo')
+    ///validamos password
+    const passwordValid = await bcrypt.compare(password, user.password)
+    if (!passwordValid) {
+        return res.status(400).json({
+            msg : `Password incorrecta`
+        })
+    }
+
+    /// token
+    const token= jwt.sign({
+        email: email
+    }, process.env.SECRET_KEY
+    );
+
+    res.json({token});
+
+}
+*/
 const deleteUser = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = request.params;
     const user = yield user_1.default.findByPk(id);

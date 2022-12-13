@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import User from '../models/user';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+//import bcrypt from 'bcrypt';
+//import jwt from 'jsonwebtoken';
 
 
 export const getUsers = async (request: Request, response: Response) => {
@@ -22,7 +22,7 @@ export const getUser = async (request: Request, response: Response) => {
         })
     }
 }
-
+/*
 export const loginUser = async (req: Request, res: Response) =>{
     const {email , password} = req.body;
 
@@ -52,7 +52,7 @@ export const loginUser = async (req: Request, res: Response) =>{
     res.json({token});
 
 }
-
+*/
 export const deleteUser = async (request: Request, response: Response) => {
     const { id } = request.params;
     const user = await User.findByPk(id);
