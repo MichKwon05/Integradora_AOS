@@ -23,6 +23,7 @@ import { ListStudyroomComponent } from './components/list-studyroom/list-studyro
 import { ListEquipmentComponent } from './components/list-equipment/list-equipment.component';
 import { AddEditEquipmentComponent } from './components/add-edit-equipment/add-edit-equipment.component';
 import { AddEditStudyroomComponent } from './components/add-edit-studyroom/add-edit-studyroom.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AddEditStudyroomComponent } from './components/add-edit-studyroom/add-e
     ListStudyroomComponent,
     ListEquipmentComponent,
     AddEditEquipmentComponent,
-    AddEditStudyroomComponent
+    AddEditStudyroomComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
