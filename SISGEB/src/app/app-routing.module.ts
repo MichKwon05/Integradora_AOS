@@ -32,8 +32,8 @@ const routes: Routes = [
   { path: 'getBooks', component: ListBooksComponent },
 
   // Salas
-  { path: 'addStudyroom', component: AddEditStudyroomComponent },
-  { path: 'editStudyroom/:id', component: AddEditStudyroomComponent },
+  { path: 'addStudyRoom', component: AddEditStudyroomComponent },
+  { path: 'editStudyRoom/:id', component: AddEditStudyroomComponent },
   { path: 'getStudyRooms' , component: ListStudyroomComponent},
 
   // Equipos

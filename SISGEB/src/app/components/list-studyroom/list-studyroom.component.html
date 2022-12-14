@@ -1,8 +1,8 @@
 <app-progress-bar  *ngIf="loading == true"></app-progress-bar>
 <div class="container">
   <div class="title">
-    <h4>Listado de salas</h4>
-    <button type="button" class="btn btn-primary" routerLink="/addStudyroom">Agregar sala</button>
+    <h4>Listado de Salas</h4>
+    <button type="button" class="btn btn-primary" routerLink="/addStudyRoom">Agregar Sala</button>
   </div>
   <table *ngIf="listStudyrooms.length > 0" class="table table-hover">
     <thead>
@@ -19,12 +19,12 @@
         <td>{{studyroom.name}}</td>
         <td>{{studyroom.capacity}}</td>
         <td class="col-2">
-          <button [routerLink]="['/editStudyroom', studyroom.id]" type="button" class="btn btn-info btn-sm" routerLink="">Editar</button>
+          <button [routerLink]="['/editStudyRoom', studyroom.id]" type="button" class="btn btn-info btn-sm" routerLink="">Editar</button>
           <button (click)="deleteStudyroom(studyroom.id!)" type="button" class="btn btn-danger btn-sm ms-2">Eliminar</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <h5  *ngIf="listStudyrooms.length == 0">No hay salas registrados</h5>
+  <h5  *ngIf="listStudyrooms.length == 0">No hay salas registradas</h5>
 </div>
 

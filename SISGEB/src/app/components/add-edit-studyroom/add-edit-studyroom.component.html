@@ -1,7 +1,8 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
 <div class="mt-3">
     <div class="col-lg-6 offset-lg-4">
       <div class="card text-white bg-info mb-3" style="max-width: 40rem">
-        <div class="card-header text-center"><h3>Agregar sala</h3></div>
+        <div class="card-header text-center"><h3>{{ operacion }} sala</h3></div>
         <div class="card-body">
           <form [formGroup]="formStudy" class="form-group" (ngSubmit)="addStudy()">
               <div class="row">
@@ -23,7 +24,7 @@
               
               <div class="row mt-4 text-center">
                   <div class="col-lg-6">
-                      <button routerLink="/getStudyRoom" type="button" class="btn btn-danger btn-lg">Volver</button>
+                      <button routerLink="/getStudyRooms" type="button" class="btn btn-danger btn-lg">Volver</button>
                   </div>
                   <div class="col-lg-6">
                       <button [disabled]="formStudy.invalid" type="submit" class="btn btn-primary btn-lg">Aceptar</button>

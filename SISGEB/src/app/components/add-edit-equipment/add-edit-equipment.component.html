@@ -1,12 +1,13 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
 <div class="mt-3">
     <div class="col-lg-6 offset-lg-4">
       <div class="card text-white bg-info mb-3" style="max-width: 40rem">
-        <div class="card-header text-center"><h3>Agregar equipo de cómputo</h3></div>
+        <div class="card-header text-center"><h3>{{operacion}} Equipo de Cómputo</h3></div>
         <div class="card-body">
-          <form [formGroup]="formEquip" class="form-group" (ngSubmit)="addEquipment">
+          <form [formGroup]="formEquip" class="form-group" (ngSubmit)="addEquipment()">
               <div class="row">
                   <div class="col-lg-6">
-                      <label for="name" class="col-form-label col-form-label-lg">Nombre de la sala</label>
+                      <label for="name" class="col-form-label col-form-label-lg">Nombre</label>
                       <input formControlName="name" type="text" class="form-control form-control-lg" name="name">
                       <span *ngIf="formEquip.get('name')?.hasError('required') && formEquip.get('name')?.touched" class="text-sm text-danger">
                           <strong>Campo Requerido</strong>
@@ -15,7 +16,7 @@
               </div>
               <div class="row mt-4 text-center">
                   <div class="col-lg-6">
-                      <button routerLink="/getEquipment" type="button" class="btn btn-danger btn-lg">Volver</button>
+                      <button routerLink="/getEquipments" type="button" class="btn btn-danger btn-lg">Volver</button>
                   </div>
                   <div class="col-lg-6">
                       <button [disabled]="formEquip.invalid" type="submit" class="btn btn-primary btn-lg">Aceptar</button>

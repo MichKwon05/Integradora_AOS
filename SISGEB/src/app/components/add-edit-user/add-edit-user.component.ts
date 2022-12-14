@@ -30,7 +30,7 @@ export class AddEditUserComponent implements OnInit {
       password: ['', Validators.required]
     })
     this.id = Number(aRouter.snapshot.paramMap.get('id'));
-    console.log(this.id);
+    //console.log(this.id);
   }
 
   ngOnInit(): void {
