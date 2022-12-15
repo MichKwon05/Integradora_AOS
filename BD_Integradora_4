@@ -6,6 +6,7 @@ INSERT INTO `inta`.`books` (`id`, `title`, `author`, `editorial`, `publishAge`) 
 -- -----------------------------------------------------
 -- Table `users`
 -- -----------------------------------------------------
+drop table users;
 CREATE TABLE users (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(60) NOT NULL,
@@ -13,7 +14,7 @@ CREATE TABLE users (
   `phone` VARCHAR(20) NOT NULL,
   `address` VARCHAR(200) NOT NULL,
   `email` VARCHAR(80) NOT NULL,
-  `password` VARCHAR(25) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB

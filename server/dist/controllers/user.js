@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.postUser = exports.deleteUser = exports.getUser = exports.getUsers = void 0;
+exports.loginUser = exports.updateUser = exports.postUser = exports.deleteUser = exports.getUser = exports.getUsers = void 0;
 const user_1 = __importDefault(require("../models/user"));
-//import bcrypt from 'bcrypt';
-//import jwt from 'jsonwebtoken';
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const getUsers = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const listUsers = yield user_1.default.findAll();
     response.json(listUsers);
@@ -34,37 +34,6 @@ const getUser = (request, response) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.getUser = getUser;
-/*
-export const loginUser = async (req: Request, res: Response) =>{
-    const {email , password} = req.body;
-
-    ///validamos si existe
-    const user: any = await User.findOne({ where: {email: email}});
-
-    if (!user) {
-        return res.status(400).json({
-            msg: `No existe el usuario con el correo ${email} en la base de datos`
-        })
-    }
-    console.log('sigo')
-    ///validamos password
-    const passwordValid = await bcrypt.compare(password, user.password)
-    if (!passwordValid) {
-        return res.status(400).json({
-            msg : `Password incorrecta`
-        })
-    }
-
-    /// token
-    const token= jwt.sign({
-        email: email
-    }, process.env.SECRET_KEY
-    );
-
-    res.json({token});
-
-}
-*/
 const deleteUser = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = request.params;
     const user = yield user_1.default.findByPk(id);
@@ -82,9 +51,23 @@ const deleteUser = (request, response) => __awaiter(void 0, void 0, void 0, func
 });
 exports.deleteUser = deleteUser;
 const postUser = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    const { body } = request;
+    const { name, surname, phone, address, email, password } = request.body;
+    const user = yield user_1.default.findOne({ where: { email: email } });
+    if (user) {
+        return response.status(400).json({
+            mensaje: `Ya existe un usuario con el correo ${email}`
+        });
+    }
+    const hashedPassword = yield bcrypt_1.default.hash(password, 10);
     try {
-        yield user_1.default.create(body);
+        yield user_1.default.create({
+            name: name,
+            surname: surname,
+            phone: phone,
+            address: address,
+            email: email,
+            password: hashedPassword
+        });
         response.json({
             mensaje: 'Usuario Agregado con exito'
         });
@@ -122,3 +105,26 @@ const updateUser = (request, response) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.updateUser = updateUser;
+const loginUser = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = request.body;
+    // Validación de Usuario
+    const user = yield user_1.default.findOne({ where: { email: email } });
+    if (!user) {
+        return response.status(400).json({
+            mensaje: `No existe un usuario con ese correo`
+        });
+    }
+    // Validacion de Contraseña
+    const passwordValid = yield bcrypt_1.default.compare(password, user.password);
+    if (!passwordValid) {
+        return response.status(400).json({
+            mensaje: 'Contraseña Incorrecta'
+        });
+    }
+    // Generación del TOKEN
+    const token = jsonwebtoken_1.default.sign({
+        email: email
+    }, process.env.SECRET_KEY || 'miguelA');
+    response.json({ token });
+});
+exports.loginUser = loginUser;
