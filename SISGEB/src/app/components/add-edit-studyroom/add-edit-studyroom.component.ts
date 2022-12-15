@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,7 +21,7 @@ export class AddEditStudyroomComponent implements OnInit {
     private _studyRoomService: StudyroomService,
     private router: Router,
     private toastr: ToastrService,
-    private aRouter: ActivatedRoute){
+    private aRouter: ActivatedRoute) {
     this.formStudy = this.fb.group({
       name: ['', Validators.required],
       capacity: ['', Validators.required]
@@ -36,7 +37,7 @@ export class AddEditStudyroomComponent implements OnInit {
     }
   }
 
-  getStudyRoom(id: number){
+  getStudyRoom(id: number) {
     this.loading = true;
     this._studyRoomService.getStudyroom(id).subscribe((data: Studyroom) => {
       this.loading = false;
@@ -47,29 +48,48 @@ export class AddEditStudyroomComponent implements OnInit {
     })
   }
 
-  addStudy(){
+  addStudy() {
     const study: Studyroom = {
       name: this.formStudy.value.name,
       capacity: this.formStudy.value.capacity
     }
     this.loading = true;
 
-    if(this.id !== 0){
+    if (this.id !== 0) {
       // Editar
       study.id = this.id;
-      this._studyRoomService.updateStudyroom(this.id, study).subscribe(() => {
-        this.toastr.info(`${study.name} fue actualizada con exito`, 'Sala Actualizada');
-        this.loading = false;
-        this.router.navigate(['/getStudyRooms']);
+      this._studyRoomService.updateStudyroom(this.id, study).subscribe({
+        next: () => {
+          this.toastr.info(`${study.name} fue actualizada con exito`, 'Sala Actualizada');
+          this.loading = false;
+          this.router.navigate(['/getStudyRooms']);
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this.msjError(e);
+        }
       })
-    }else{
+    } else {
       // Agregar
-      this._studyRoomService.saveStudyroom(study).subscribe(() => {
-        this.toastr.success(`${study.name} fue registrada con exito`, 'Sala Registrada');
-        this.loading = false;
-        this.router.navigate(['/getStudyRooms']);
+      this._studyRoomService.saveStudyroom(study).subscribe({
+        next: () => {
+          this.toastr.success(`${study.name} fue registrada con exito`, 'Sala Registrada');
+          this.loading = false;
+          this.router.navigate(['/getStudyRooms']);
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this.msjError(e);
+        }
       })
     }
   }
 
+  msjError(e: HttpErrorResponse) {
+    if (e.error.mensaje) {
+      this.toastr.error(e.error.mensaje, 'Error');
+    } else {
+      this.toastr.error('No se logró establecer conexión con el servidor', 'Error');
+    }
+  }
 }

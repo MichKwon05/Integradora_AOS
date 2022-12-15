@@ -4,7 +4,7 @@ import validateToken from './validate-token';
 
 const router = Router();
 
-router.get('/', validateToken, getUsers);
+router.get('/', /*validateToken,*/ getUsers);
 router.get('/:id', getUser);
 router.delete('/:id', deleteUser);
 router.post('/', postUser);

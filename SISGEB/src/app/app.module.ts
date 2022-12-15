@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 // Moduloss
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr';
 
 // Componentes
@@ -24,6 +24,8 @@ import { ListEquipmentComponent } from './components/list-equipment/list-equipme
 import { AddEditEquipmentComponent } from './components/add-edit-equipment/add-edit-equipment.component';
 import { AddEditStudyroomComponent } from './components/add-edit-studyroom/add-edit-studyroom.component';
 import { LoginComponent } from './components/login/login.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { AddTokenInterceptor } from './utils/add-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { LoginComponent } from './components/login/login.component';
     ListEquipmentComponent,
     AddEditEquipmentComponent,
     AddEditStudyroomComponent,
-    LoginComponent
+    LoginComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -50,10 +53,13 @@ import { LoginComponent } from './components/login/login.component';
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({
       timeOut: 5000,
-      positionClass: 'toast-bottom-right'
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
     }), // ToastrModule added
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

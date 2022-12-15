@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,23 +21,23 @@ export class AddEditEquipmentComponent implements OnInit {
     private _equipService: EquipmentService,
     private router: Router,
     private toastr: ToastrService,
-    private aRouter: ActivatedRoute){
-    this.formEquip= this.fb.group({
+    private aRouter: ActivatedRoute) {
+    this.formEquip = this.fb.group({
       name: ['', Validators.required]
     })
     this.id = Number(aRouter.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
-    if(this.id != 0){
+    if (this.id != 0) {
       this.operacion = 'Editar'
       this.getEquipment(this.id);
     }
   }
 
-  getEquipment(id: number){
+  getEquipment(id: number) {
     this.loading = true;
-    this._equipService.getEquipment(id).subscribe((data:Equipment) => {
+    this._equipService.getEquipment(id).subscribe((data: Equipment) => {
       this.loading = false;
       this.formEquip.setValue({
         name: data.name
@@ -44,28 +45,47 @@ export class AddEditEquipmentComponent implements OnInit {
     })
   }
 
-  addEquipment(){
-    const equipment : Equipment= {
+  addEquipment() {
+    const equipment: Equipment = {
       name: this.formEquip.value.name
     }
     this.loading = true;
-    
-    if(this.id !== 0){
+
+    if (this.id !== 0) {
       // Editar
       equipment.id = this.id;
-      this._equipService.updateEquipment(this.id, equipment).subscribe(() => {
-        this.toastr.info(`${equipment.name} fue actualizado con exito`, 'Usuario Actualizado');
-        this.loading = false;
-        this.router.navigate(['/getEquipments']);
+      this._equipService.updateEquipment(this.id, equipment).subscribe({
+        next: () => {
+          this.toastr.info(`${equipment.name} fue actualizado con exito`, 'Usuario Actualizado');
+          this.loading = false;
+          this.router.navigate(['/getEquipments']);
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this.msjError(e);
+        }
       })
-    }else{
+    } else {
       // Agregar
-      this._equipService.saveEquipment(equipment).subscribe(() => {
-        this.toastr.success(`${equipment.name} fue registrado con exito`, 'Usuario Registrado');
-        this.loading = false;
-        this.router.navigate(['/getEquipments']);
+      this._equipService.saveEquipment(equipment).subscribe({
+        next: () => {
+          this.toastr.success(`${equipment.name} fue registrado con exito`, 'Usuario Registrado');
+          this.loading = false;
+          this.router.navigate(['/getEquipments']);
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this.msjError(e);
+        }
       })
     }
   }
 
+  msjError(e: HttpErrorResponse) {
+    if (e.error.mensaje) {
+      this.toastr.error(e.error.mensaje, 'Error');
+    } else {
+      this.toastr.error('No se logró establecer conexión con el servidor', 'Error');
+    }
+  }
 }

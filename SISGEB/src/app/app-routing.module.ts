@@ -6,25 +6,26 @@ import { AddEditUserComponent } from './components/add-edit-user/add-edit-user.c
 import { ListBooksComponent } from './components/list-books/list-books.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { PageNotFoundComponentComponent } from './components/page-not-found-component/page-not-found-component.component';
-import { ProfileUserComponent } from './components/profile-user/profile-user.component';
 import { AddEditEquipmentComponent } from './components/add-edit-equipment/add-edit-equipment.component';
 import { AddEditStudyroomComponent } from './components/add-edit-studyroom/add-edit-studyroom.component';
 import { AddEditBookComponent } from './components/add-edit-book/add-edit-book.component';
 import { ListEquipmentComponent } from './components/list-equipment/list-equipment.component';
 import { ListStudyroomComponent } from './components/list-studyroom/list-studyroom.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './utils/auth.guard';
 
 const routes: Routes = [
-  // Temporal
-  { path: '', component: ListUsersComponent },
+  // Redirecciona al Login
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
   //En contrucción--------------------------------------//
-  { path: 'profile', component: ProfileUserComponent },
+  { path: 'login', component: LoginComponent },
   //---------------------------------------------------//
 
   // Usuarios
   { path: 'addUser', component: AddEditUserComponent },
   { path: 'editUser/:id', component: AddEditUserComponent },
-  { path: 'getUsers' , component: ListUsersComponent },
+  { path: 'getUsers' , component: ListUsersComponent, canActivate: [AuthGuard] },
 
   // Libros
   { path: 'addBook', component: AddEditBookComponent },

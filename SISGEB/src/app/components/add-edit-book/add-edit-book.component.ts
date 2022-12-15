@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +13,7 @@ import { BooksService } from 'src/app/services/books.service';
 })
 export class AddEditBookComponent {
   form: FormGroup;
-  loading: boolean = false;
+  loading: boolean = false; 
   id: number;
   operacion: string = 'Agregar';
 
@@ -39,9 +40,9 @@ export class AddEditBookComponent {
     }
   }
 
-  getBook(id: number){
+  getBook(id: number) {
     this.loading = true;
-    this._bookService.getBook(id).subscribe((data:Book) => {
+    this._bookService.getBook(id).subscribe((data: Book) => {
       //console.log(data);
       this.loading = false;
       this.form.setValue({
@@ -62,22 +63,41 @@ export class AddEditBookComponent {
       publishAge: this.form.value.publishAge
     }
     this.loading = true;
-    
-    if(this.id !== 0){
+
+    if (this.id !== 0) {
       // Editar
       book.id = this.id;
-      this._bookService.updateBook(this.id, book).subscribe(() => {
-        this.toastr.info(`El libro fue actualizado con exito`, 'Libro Actualizado');
-        this.loading = false;
-        this.router.navigate(['/getBooks']);
+      this._bookService.updateBook(this.id, book).subscribe({
+        next: () => {
+          this.toastr.info(`El libro fue actualizado con exito`, 'Libro Actualizado');
+          this.loading = false;
+          this.router.navigate(['/getBooks']);
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this.msjError(e);
+        }
       })
-    }else{
+    } else {
       // Agregar
-      this._bookService.saveBook(book).subscribe(() => {
-        this.toastr.success(`Libro ${book.title} fue registrado con exito`, 'Libro Registrado');
-        this.loading = false;
-        this.router.navigate(['/getBooks']);
+      this._bookService.saveBook(book).subscribe({
+        next: () => {
+          this.toastr.success(`Libro ${book.title} fue registrado con exito`, 'Libro Registrado');
+          this.loading = false;
+          this.router.navigate(['/getBooks']);
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this.msjError(e);
+        }
       })
+    }
+  }
+  msjError(e: HttpErrorResponse) {
+    if (e.error.mensaje) {
+      this.toastr.error(e.error.mensaje, 'Error');
+    } else {
+      this.toastr.error('No se logró establecer conexión con el servidor', 'Error');
     }
   }
 }

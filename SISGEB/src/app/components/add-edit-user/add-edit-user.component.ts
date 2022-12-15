@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -70,18 +71,37 @@ export class AddEditUserComponent implements OnInit {
     if(this.id !== 0){
       // Editar
       user.id = this.id;
-      this._userService.updateUser(this.id, user).subscribe(() => {
-        this.toastr.info(`Usuario de ${user.name} ${user.surname} fue actualizado con exito`, 'Usuario Actualizado');
-        this.loading = false;
-        this.router.navigate(['/getUsers']);
+      this._userService.updateUser(this.id, user).subscribe({
+        next: (v) => {
+          this.loading = false;
+          this.toastr.info(`Usuario de ${user.name} ${user.surname} fue actualizado con exito`, 'Usuario Actualizado');
+          this.router.navigate(['/getUsers']);
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this.msjError(e);
+        }
       })
     }else{
       // Agregar
-      this._userService.saveUser(user).subscribe(() => {
-        this.toastr.success(`Usuario de ${user.name} ${user.surname} fue registrado con exito`, 'Usuario Registrado');
-        this.loading = false;
-        this.router.navigate(['/getUsers']);
+      this._userService.saveUser(user).subscribe({
+        next: (v) => {
+          this.loading = false;
+          this.toastr.success(`Usuario de ${user.name} ${user.surname} fue registrado con exito`, 'Usuario Registrado');
+          this.router.navigate(['/getUsers']);
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this.msjError(e);
+        }
       })
+    }
+  }
+  msjError(e: HttpErrorResponse){
+    if (e.error.mensaje) {
+      this.toastr.error(e.error.mensaje, 'Error');
+    }else{
+      this.toastr.error('No se logró establecer conexión con el servidor', 'Error');
     }
   }
 }

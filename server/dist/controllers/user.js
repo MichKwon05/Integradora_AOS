@@ -124,7 +124,11 @@ const loginUser = (request, response) => __awaiter(void 0, void 0, void 0, funct
     // Generación del TOKEN
     const token = jsonwebtoken_1.default.sign({
         email: email
-    }, process.env.SECRET_KEY || 'miguelA');
+    }, process.env.SECRET_KEY || 'miguelA'
+    //,{ // Establecer cuando expira el token (En milis)
+    //    expiresIn: '10000'
+    //}
+    );
     response.json({ token });
 });
 exports.loginUser = loginUser;
